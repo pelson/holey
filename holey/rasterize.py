@@ -1,7 +1,7 @@
 import numba
 import numpy as np
 
-from .polygon import winding_number
+from .loop import winding_number
 from .point import Point
 
 
@@ -17,11 +17,11 @@ def _rasterize(simplicies, points, target, target_x, target_y):
     for j in range(ny):
         for i in range(nx):
             for simplex_i in range(n_geoms):
-                poly = points[simplicies[simplex_i, :]]
-                poly = poly[::-1, :]
+                loop = points[simplicies[simplex_i, :]]
+                loop = loop[::-1, :]
 
                 pt = Point(target_x[i], target_y[j])
-                if winding_number(poly, pt) != 0:
+                if winding_number(loop, pt) != 0:
                     target[j, i] = simplex_i
                     break
     return target

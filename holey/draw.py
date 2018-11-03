@@ -1,9 +1,9 @@
 from matplotlib.patches import Polygon as _MPLPoly
 
 
-def polygon(ax, poly, *, color='blue', alpha=0.4):
+def loop(ax, loop, *, color='blue', alpha=0.4):
     p = _MPLPoly(
-            [(p.x, p.y) for p in poly],
+            [(p.x, p.y) for p in loop],
             closed=True, alpha=alpha, facecolor=color)
     ax.add_patch(p)
     return p
@@ -32,5 +32,5 @@ def splat(*geoms):
         if isinstance(geom, Point):
             point(ax, geom)
         else:
-            polygon(ax, geom)
+            loop(ax, geom)
     plt.show()
